@@ -1,0 +1,47 @@
+﻿<Mah:MetroWindow x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:Mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="一覧" Height="350" Width="530"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        >
+    <Window.Resources>
+        <ResourceDictionary Source="/Style/StyleDic.xaml"/>
+    </Window.Resources>
+
+    <Grid Height="350" Width="530">
+        <Grid.Resources>
+            <local:KindConverter x:Key="KindConv"/>
+        </Grid.Resources>
+        <Rectangle x:Name="rec_overlay" Width="530" Height="330" Style="{StaticResource rec-overlay}" />
+        <Mah:ProgressRing x:Name="loading_image" Style="{StaticResource pgr-normal}"/>
+
+        <Label Content="名前：" Margin="10,10,0,0" Style="{StaticResource lb-normal}"/>
+        <TextBox x:Name="search_name" Margin="56,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"  Style="{StaticResource MetroTextBox}"/>
+        <Label Content="種別：" Margin="201,10,0,0" Style="{StaticResource lb-normal}"/>
+        <ComboBox x:Name="search_kind" Margin="252,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125"  Style="{StaticResource MetroComboBox}"/>
+        <Button x:Name="search_button" Content="検索" HorizontalAlignment="Left" Margin="432,12,0,0" VerticalAlignment="Top" Width="75"  Click="search_button_Click" Style="{DynamicResource SquareButtonStyle}"/>
+
+        <DataGrid Name="dataGrid" HorizontalAlignment="Left" Margin="10,43,0,0" Width="497" Height="225" Style="{StaticResource grid-normal}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding No}" ClipboardContentBinding="{x:Null}" Header="No" IsReadOnly="True" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="名前" IsReadOnly="True" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Sex}" ClipboardContentBinding="{x:Null}" Header="性別" IsReadOnly="True" Width="40"/>
+                <DataGridTextColumn Binding="{Binding Age}" ClipboardContentBinding="{x:Null}" Header="年齢" IsReadOnly="True" Width="40"/>
+                <DataGridTextColumn Binding="{Binding Kind, Converter={StaticResource KindConv}}" ClipboardContentBinding="{x:Null}" Header="種別" IsReadOnly="True" Width="120"/>
+                <DataGridTextColumn Binding="{Binding Favorite}" ClipboardContentBinding="{x:Null}" Header="好物" IsReadOnly="True" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="add_button" Content="追加" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="add_button_Click" Style="{DynamicResource AccentedSquareButtonStyle}"/>
+        <Button x:Name="upd_button" Content="更新" HorizontalAlignment="Left" Margin="90,273,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="upd_button_Click" Style="{DynamicResource AccentedSquareButtonStyle}"/>
+        <Button x:Name="del_button" Content="削除" HorizontalAlignment="Left" Margin="170,273,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="del_button_Click" Style="{DynamicResource AccentedSquareButtonStyle}"/>
+        <Button x:Name="imp_button" Content="CSV読込" HorizontalAlignment="Left" Margin="250,273,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="imp_button_Click" Style="{DynamicResource AccentedSquareButtonStyle}"/>
+        <Button x:Name="exp_button" Content="CSV出力" HorizontalAlignment="Left" Margin="330,273,0,0" VerticalAlignment="Top" Width="75" Height="30" Click="exp_button_Click" Style="{DynamicResource AccentedSquareButtonStyle}"/>
+        <Button x:Name="fld_button" Content="フォルダ参照" HorizontalAlignment="Left" Margin="410,273,0,0" VerticalAlignment="Top" Width="97" Height="30" Click="fld_button_Click" Style="{DynamicResource AccentedSquareButtonStyle}"/>
+    </Grid>
+</Mah:MetroWindow>
